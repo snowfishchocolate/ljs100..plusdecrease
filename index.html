@@ -7,98 +7,120 @@
     <title>Document</title>
     <style>
         body{
-            background-color: #95b8d1;
+            height: 100vh;
+            background-image: url();
             position: relative;
         }
-        main{
-            background-color: #f5f5f5;
-            width: 900px;
-            height: 300px;
+        .container{
+            width: 600px;
+            height: 400px;
+            background-image: url(../wood.jpeg);
+            background-position: center;
+            border:white 1px solid;
             position: absolute;
             left:50%;
             top:50%;
-            transform: translate(-50%,50%);
-            position: relative;
+            transform: translate(-50%,-50%);
+            box-shadow:5px 10px 10px black ;
         }
-        #box{
-            text-transform: uppercase;
-        }
-        
-        .content{
-           position: absolute;
-           left:50%;
-           top:50%;
-           transform: translate(-50%,-50%);
-        }
-        p{
-            font-size: 20px;
-        }
-        input{
+        .left {
+            width: fit-content;
+            height: fit-content;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            box-shadow: 5px 5px 5px black;
+            position: absolute;
+            left:21%;
+            top:77%;
+            cursor: pointer;
             
-            width: 300px;
-            height: 30px;
+            
         }
-        button{
-            background-color: #95b8d1;
-            border: 0.5px solid rgb(0, 119, 255);
-            padding:20px;
-            font-size: 20px;
+        .left:hover,.right:hover{
+            background-color: rgb(60, 206, 243);
+            transition-duration: 0.3s;
         }
-        .redbox{
-            width: 220px;
-            height: 20px;
-            background-color: rgb(248, 171, 171);
-            border: red 0.5px solid;
-            padding: 20px;
-            font-size: 20px;
+        .left:focus,.right:focus{
+            outline:20px rgb(236, 79, 87) ;
+
+        }
+        .right{
+            width: fit-content;
+            height: fit-content;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            box-shadow: 5px 5px 5px black;
+            position: absolute;
+            left:70%;
+            top:77%;
+            cursor:pointer;
+        }
+        h2{
+            font-size:50px;
+            color: white;
+            margin: 30px 160px;
+        }
+        .show{
+            font-size: 130px;
+            margin:0 270px;
+            font-weight: 900;
         }
     </style>
 </head>
 <body>
-    <main>
-        <div class="content">
-            <p>A Messge You Would Like To Pass</p>
-            <input type="text">
-            <button>send</button>
-            <p>Last Message Delivered</p>
-            <div id="box">hello wrold</div>
-           
-        </div>
-        
-    </main>
+    <div class="container">
+        <h2>COUNTER</h2>
+        <div class="show"></div>
+        <div class="left">Lower</div>
+        <div class="right">Add</div>
+    </div>
     <script>
-        var clickBtn=document.querySelector('button');
+        // document.querySelector('.left').classList.add(tabindex='0',hidefocus="true",onfocus='alert',onblur='alert');
+        var count=0;
+        var showBox=document.querySelector('.show');
+        showBox.innerHTML=count;
+        showBox.style.color='brown';
+        var clickBtn=document.querySelector('.left');
         clickBtn.addEventListener('click',function(){
-            var inputValue=document.querySelector('input').value;
-            var showBox=document.querySelector('#box');
            
-            if (inputValue.length == 0){
-                //刷新頁面的function//
-                function myrefresh()
-                {window.location.reload();}
+            count--;
+            showBox.textContent=count;//和innerHTML功效類似
 
-                showBox.innerHTML=` <div class="redbox">please enter a value to pass</div>`;
-                
-                setTimeout("document.getElementById('box').style.display = 'none';", 1000);
-                setTimeout('myrefresh()',1000);
-                            }
-                            else {
-                                //用textcontent可以讓文字傳送出去後輸入框變白，但是用innerHTML不行//
-                                showBox.textContent =inputValue;
-                                document.querySelector('input').value = '';
-                            }
-
+                    function updateColor(){
+                    var color='brown';
+                    if(count>0){
+                        color='green';
+                    }else if(count<0){
+                        color='blue';
+                    }
+                    showBox.style.color=color
+                    }
+                    updateColor();
         })
-                    function myrefresh()//傳送出去後刷新頁面//
-                            {
-                            window.location.reload();
-                            
-                            }
-                            
-    </script>
-    <script>
+        var clickBtn=document.querySelector('.right');
+        clickBtn.addEventListener('click',function(){
+           
+            count++;
+            showBox.textContent=count;//和innerHTML功效類似
+
+
+                function updateColor(){
+                var color='brown';
+                if(count>0){
+                    color='green';
+                }else if(count<0){
+                    color='blue';
+                }
+                showBox.style.color=color
+                }
+                updateColor();
+        })
+       
     
     </script>
-
 </body>
 </html>
